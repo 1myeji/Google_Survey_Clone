@@ -8,6 +8,13 @@ const GlobalStyle = createGlobalStyle`
   body {
     box-sizing: border-box;
   }
+  input {
+    border: none;
+    outline: none;
+  }
+  input:focus {
+    border-bottom: 2px solid rgb(103, 58, 183);;
+  }
 `;
 
 export default GlobalStyle;
