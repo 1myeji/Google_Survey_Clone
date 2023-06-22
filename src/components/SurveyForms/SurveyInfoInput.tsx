@@ -40,4 +40,5 @@ const Title = styled.input`
 
 const Description = styled.input`
   padding-bottom: 5px;
+  padding-left: 3px;
 `;
