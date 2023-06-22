@@ -13,7 +13,8 @@ export default Layout;
 
 const Main = styled.main`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
   background: #efebf7;
 `;
