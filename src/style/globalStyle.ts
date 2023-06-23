@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
   input:focus {
-    border-bottom: 2px solid rgb(103, 58, 183);;
+    border-bottom: 2px solid rgb(103, 58, 183);
   }
 `;
 

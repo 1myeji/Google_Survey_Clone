@@ -5,7 +5,7 @@ import { useState } from 'react';
 import SurveyQuestionAnswer from './SurveyQuestionAnswer';
 
 const SurveyQuestion = () => {
-  const [age, setAge] = useState('10');
+  const [age, setAge] = useState('30');
 
   return (
     <SurveyQuestionBox>

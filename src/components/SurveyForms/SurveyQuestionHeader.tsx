@@ -40,6 +40,7 @@ const SurveyQuestionHeader = ({ age, setAge }: ISurveyQuestionHeaderProps) => {
           multiline
           onFocus={handleTextFieldFocus}
           onBlur={handleTextFieldFocus}
+          color="secondary"
         />
         <IconButton>
           <CropOriginalIcon />
@@ -72,12 +73,6 @@ const TitleTextField = styled(TextField)`
   word-break: break-all;
   .MuiInputBase-root-hxnqRp {
     padding: 16px;
-  }
-  .Mui-focused:before {
-    border-bottom: 2px solid rgb(103, 58, 183);
-  }
-  .Mui-focused:after {
-    border-bottom: 2px solid rgb(103, 58, 183);
   }
 `;
 
