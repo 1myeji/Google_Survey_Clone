@@ -46,7 +46,6 @@ const EditFormatIcon = ({ isFocused }: IEditFormatIconProps) => {
 export default EditFormatIcon;
 
 const IconWrapper = styled.div`
-  margin-left: 15px;
   margin-top: 4px;
   display: ${({ isFocused }: { isFocused: boolean }) => (isFocused ? 'block' : 'none')};
   .MuiButtonBase-root-iLYEZ {

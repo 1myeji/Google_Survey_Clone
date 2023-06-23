@@ -40,7 +40,7 @@ const SurveyQuestionHeader = () => {
         <IconButton>
           <CropOriginalIcon />
         </IconButton>
-        <FormControl sx={{ minWidth: 175, marginLeft: 2 }}>
+        <FormControl sx={{ minWidth: 190, marginLeft: 2 }}>
           <Select value={age} onChange={handleChange}>
             {SurveyQuestionType.map((type, index) => (
               <MenuItem value={(index + 1) * 10} key={type}>
@@ -63,7 +63,6 @@ const TitleTextFieldWrapper = styled.div`
 `;
 
 const TitleTextField = styled(TextField)`
-  margin-left: 16px;
   margin-right: 16px;
   width: 414px;
   word-break: break-all;
