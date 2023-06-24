@@ -6,27 +6,25 @@ import styled from 'styled-components';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useDispatch } from 'react-redux';
+import { copyQuestion, deleteQuestion } from '../../store/surveyQuestionSlice';
 
 interface ISurveyQuestionControlProps {
-  handleQuestionDelete: (questionDelete: number) => void;
-  handleQuestionCopy: (questionCopy: number) => void;
-  question: number;
+  id: number;
 }
 
-const SurveyQuestionControls = ({
-  handleQuestionDelete,
-  handleQuestionCopy,
-  question,
-}: ISurveyQuestionControlProps) => {
+const SurveyQuestionControls = ({ id }: ISurveyQuestionControlProps) => {
+  const dispatch = useDispatch();
+
   return (
     <ControlsWrapper>
       <Tooltip title="복사">
-        <IconButton onClick={() => handleQuestionCopy(question)}>
+        <IconButton onClick={() => dispatch(copyQuestion(id))}>
           <ContentCopyIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="삭제">
-        <IconButton onClick={() => handleQuestionDelete(question)}>
+        <IconButton onClick={() => dispatch(deleteQuestion(id))}>
           <DeleteOutlineIcon />
         </IconButton>
       </Tooltip>

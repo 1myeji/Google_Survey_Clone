@@ -8,20 +8,26 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import EditFormatIcon from '../common/EditFormatIcon';
+import { useDispatch } from 'react-redux';
+import { changeAge } from '../../store/surveyQuestionSlice';
 
 const SurveyQuestionType = ['단답형', '장문형', '객관식 질문', '체크박스', '드롭다운'];
 
 interface ISurveyQuestionHeaderProps {
   id: number;
   age: string;
-  handleAgeChange: (id: number, age: string) => void;
 }
 
-const SurveyQuestionHeader = ({ id, age, handleAgeChange }: ISurveyQuestionHeaderProps) => {
+const SurveyQuestionHeader = ({ id, age }: ISurveyQuestionHeaderProps) => {
+  const dispatch = useDispatch();
   const [isFocused, setIsFocused] = useState(false);
 
   const handleTextFieldFocus = () => {
     setIsFocused(!isFocused);
+  };
+
+  const handleAgeChange = (id: number, age: string) => {
+    dispatch(changeAge({ id, age }));
   };
 
   return (

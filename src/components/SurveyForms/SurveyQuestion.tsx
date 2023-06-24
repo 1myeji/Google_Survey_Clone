@@ -5,39 +5,21 @@ import SurveyQuestionAnswer from './SurveyQuestionAnswer';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import Tooltip from '@mui/material/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addQuestion,
-  changeAge,
-  copyQuestion,
-  deleteQuestion,
-} from '../../store/surveyQuestionSlice';
+import { addQuestion } from '../../store/surveyQuestionSlice';
 import { RootState } from '../../store/store';
 
 const SurveyQuestion = () => {
   const questions = useSelector((state: RootState) => state.surveyQuestion);
   const dispatch = useDispatch();
-  console.log(questions);
-
-  const handleAgeChange = (id: number, age: string) => {
-    dispatch(changeAge({ id, age }));
-  };
 
   return (
     <SurveyQuestionBoxWrapper>
       <div>
         {questions.map(question => (
           <SurveyQuestionBox key={question.id}>
-            <SurveyQuestionHeader
-              id={question.id}
-              age={question.age}
-              handleAgeChange={handleAgeChange}
-            />
+            <SurveyQuestionHeader id={question.id} age={question.age} />
             <SurveyQuestionAnswer age={question.age} />
-            <SurveyQuestionControls
-              handleQuestionDelete={() => dispatch(deleteQuestion(question.id))}
-              handleQuestionCopy={() => dispatch(copyQuestion(question.id))}
-              question={question.id}
-            />
+            <SurveyQuestionControls id={question.id} />
           </SurveyQuestionBox>
         ))}
       </div>
