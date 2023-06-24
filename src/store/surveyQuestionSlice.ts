@@ -4,6 +4,7 @@ export interface surveyQuestionState {
   id: number;
   age: string;
   questionTitle: string;
+  questionAnswer: string;
   questionOptions: {
     id: number;
     optionTitle: string;
@@ -16,6 +17,7 @@ const initialState: surveyQuestionState[] = [
     id: Math.random() * 10,
     age: '30',
     questionTitle: '',
+    questionAnswer: '',
     questionOptions: [{ id: Date.now(), optionTitle: '' }],
     essential: false,
   },
@@ -25,21 +27,22 @@ const surveyQuestion = createSlice({
   name: 'surveyQuestion',
   initialState,
   reducers: {
-    addQuestion(state) {
+    addQuestion: state => {
       state.push({
         id: Math.random() * 10,
         age: '30',
         questionTitle: '',
+        questionAnswer: '',
         questionOptions: [{ id: Date.now(), optionTitle: '' }],
         essential: false,
       });
     },
 
-    deleteQuestion(state, action) {
+    deleteQuestion: (state, action) => {
       return state.filter(question => question.id !== action.payload);
     },
 
-    copyQuestion(state, action) {
+    copyQuestion: (state, action) => {
       const questionIndex = state.findIndex(question => question.id === action.payload);
       if (questionIndex !== -1) {
         const questionCopy = JSON.parse(JSON.stringify(state[questionIndex]));
@@ -48,13 +51,13 @@ const surveyQuestion = createSlice({
       }
     },
 
-    changeAge(state, action) {
+    changeAge: (state, action) => {
       const { id, age } = action.payload;
       const question = state.find(question => question.id === id);
       if (question) question.age = age;
     },
 
-    changeQuestionTitle(state, action) {
+    changeQuestionTitle: (state, action) => {
       const { id, title } = action.payload;
       const question = state.find(question => question.id === id);
       if (question) question.questionTitle = title;
@@ -91,6 +94,14 @@ const surveyQuestion = createSlice({
         question.essential = !question.essential;
       }
     },
+
+    changeQuestionAnswer: (state, action) => {
+      const { id, answer } = action.payload;
+      const question = state.find(question => question.id === id);
+      if (question) {
+        question.questionAnswer = answer;
+      }
+    },
   },
 });
 
@@ -104,5 +115,6 @@ export const {
   deleteOption,
   changeOptionTitle,
   toggleEssential,
+  changeQuestionAnswer,
 } = surveyQuestion.actions;
 export default surveyQuestion;

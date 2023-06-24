@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 interface SurveyInfoProps {
   children: React.ReactNode;
+  includePurpleBox?: boolean;
 }
 
-const SurveyInfo = ({ children }: SurveyInfoProps) => {
+const SurveyInfo = ({ children, includePurpleBox = false }: SurveyInfoProps) => {
   return (
     <SectionContainer>
-      <PurpleBox></PurpleBox>
+      {includePurpleBox && <PurpleBox></PurpleBox>}
       {children}
     </SectionContainer>
   );

@@ -11,7 +11,7 @@ interface ChangeInfoPayload {
 }
 
 const initialState: surveyInfoState = {
-  title: '',
+  title: '제목 없는 설문지',
   description: '',
 };
 
@@ -19,7 +19,7 @@ const surveyInfo = createSlice({
   name: 'surveyInfo',
   initialState,
   reducers: {
-    changeSurveyInfo(state, action: PayloadAction<ChangeInfoPayload>) {
+    changeSurveyInfo: (state, action: PayloadAction<ChangeInfoPayload>) => {
       const { type, value } = action.payload;
       state[type] = value;
     },

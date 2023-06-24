@@ -9,6 +9,7 @@ interface ISurveyInputProps {
   defaultValue?: string;
   placeholder?: string;
   sx?: any;
+  IsDisableUnderline?: boolean;
 }
 
 const SurveyInput = ({
@@ -17,12 +18,13 @@ const SurveyInput = ({
   defaultValue,
   placeholder,
   sx,
+  IsDisableUnderline = true,
 }: ISurveyInputProps) => {
   return (
     <OptionInput
       inputProps={ariaLabel}
       color="secondary"
-      disableUnderline
+      disableUnderline={IsDisableUnderline}
       value={value}
       defaultValue={defaultValue}
       onChange={handleContentChange}
@@ -35,5 +37,5 @@ const SurveyInput = ({
 export default SurveyInput;
 
 const OptionInput = styled(Input)`
-  width: 530px;
+  /* width: 530px; */
 `;
