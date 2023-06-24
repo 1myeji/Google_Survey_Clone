@@ -1,9 +1,11 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import OptionInputGroup from './OptionInputGroup';
 import RadioIcon from '../../common/RadioIcon';
 import CheckBoxIcon from '../../common/CheckBoxIcon';
 import DropDownIcon from '../../common/DropDownIcon';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import { addOption } from '../../../store/surveyQuestionSlice';
 
 const optionType = {
   radio: RadioIcon,
@@ -13,30 +15,33 @@ const optionType = {
 
 interface IOptionGroupProps {
   type: 'radio' | 'checkbox' | 'dropdown';
+  questionId: number;
 }
 
-const OptionGroup = ({ type }: IOptionGroupProps) => {
+const OptionGroup = ({ type, questionId }: IOptionGroupProps) => {
   const InputIcon = optionType[type];
-  const [options, setOptions] = useState([1]);
+  const options = useSelector((state: RootState) =>
+    state.surveyQuestion.find(question => question.id === questionId),
+  );
 
-  const handleAddOptionClick = () => {
-    setOptions(prev => [...prev, prev.length + 1]);
-  };
-
-  const handleOptionDelete = (optionDelete: number) => {
-    setOptions(prev => prev.filter(option => option !== optionDelete));
-  };
+  const dispatch = useDispatch();
 
   return (
     <OptionGroupWrapper>
-      {options.map((option, index) => (
-        <OptionInputGroup key={option} option={option} handleOptionDelete={handleOptionDelete}>
+      {options?.questionOptions.map((option, index) => (
+        <OptionInputGroup key={option.id} index={index} id={option.id} options={options}>
           <InputIcon value={`${index + 1}`} disabled={true} />
         </OptionInputGroup>
       ))}
       <InputGroupWrapper>
-        <InputIcon disabled={true} value={String(options.length + 1)} />
-        <AddOption onClick={handleAddOptionClick}>옵션 추가</AddOption>
+        <InputIcon disabled={true} value={options && String(options.questionOptions.length + 1)} />
+        <AddOption
+          onClick={() => {
+            dispatch(addOption({ questionId }));
+          }}
+        >
+          옵션 추가
+        </AddOption>
       </InputGroupWrapper>
     </OptionGroupWrapper>
   );

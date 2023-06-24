@@ -1,7 +1,11 @@
 import OptionGroup from './OptionGroup';
 
-const MultipleChoice = () => {
-  return <OptionGroup type="radio" />;
+interface IMultipleChoiceProps {
+  questionId: number;
+}
+
+const MultipleChoice = ({ questionId }: IMultipleChoiceProps) => {
+  return <OptionGroup type="radio" questionId={questionId} />;
 };
 
 export default MultipleChoice;

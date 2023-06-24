@@ -1,7 +1,11 @@
 import OptionGroup from './OptionGroup';
 
-const Checkbox = () => {
-  return <OptionGroup type="checkbox" />;
+interface ICheckboxProps {
+  questionId: number;
+}
+
+const Checkbox = ({ questionId }: ICheckboxProps) => {
+  return <OptionGroup type="checkbox" questionId={questionId} />;
 };
 
 export default Checkbox;

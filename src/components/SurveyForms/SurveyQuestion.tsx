@@ -23,7 +23,7 @@ const SurveyQuestion = () => {
               age={question.age}
               title={question.questionTitle}
             />
-            <SurveyQuestionAnswer age={question.age} />
+            <SurveyQuestionAnswer age={question.age} questionId={question.id} />
             <SurveyQuestionControls id={question.id} />
           </SurveyQuestionBox>
         ))}
