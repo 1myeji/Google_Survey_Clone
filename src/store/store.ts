@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import surveyInfo from './surveyInfoSlice';
+import surveyQuestion from './surveyQuestionSlice';
 
 export const store = configureStore({
   reducer: {
     surveyInfo: surveyInfo.reducer,
+    surveyQuestion: surveyQuestion.reducer,
   },
 });
 

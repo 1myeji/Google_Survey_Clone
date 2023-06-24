@@ -1,37 +1,26 @@
 import styled from 'styled-components';
 import SurveyQuestionHeader from './SurveyQuestionHeader';
 import SurveyQuestionControls from './SurveyQuestionControls ';
-import { useState } from 'react';
 import SurveyQuestionAnswer from './SurveyQuestionAnswer';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import Tooltip from '@mui/material/Tooltip';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addQuestion,
+  changeAge,
+  copyQuestion,
+  deleteQuestion,
+} from '../../store/surveyQuestionSlice';
+import { RootState } from '../../store/store';
 
 const SurveyQuestion = () => {
-  const [questions, setQuestions] = useState([{ id: Math.random() * 10, age: '30' }]);
-
-  const handleAddQuestion = () => {
-    setQuestions(prev => [...prev, { id: Math.random() * 10, age: '30' }]);
-  };
-
-  const handleQuestionDelete = (questionDelete: number) => {
-    setQuestions(prev => prev.filter(question => question.id !== questionDelete));
-  };
-
-  const handleQuestionCopy = (questionCopyId: number) => {
-    const questionCopy = questions.find(question => question.id === questionCopyId);
-    if (questionCopy) {
-      const newQuestion = { ...questionCopy, id: Math.random() * 10 };
-      setQuestions(prev => [...prev, newQuestion]);
-    }
-  };
+  const questions = useSelector((state: RootState) => state.surveyQuestion);
+  const dispatch = useDispatch();
+  console.log(questions);
 
   const handleAgeChange = (id: number, age: string) => {
-    setQuestions(prev =>
-      prev.map(question => (question.id === id ? { ...question, age } : question)),
-    );
+    dispatch(changeAge({ id, age }));
   };
-
-  console.log(questions);
 
   return (
     <SurveyQuestionBoxWrapper>
@@ -45,8 +34,8 @@ const SurveyQuestion = () => {
             />
             <SurveyQuestionAnswer age={question.age} />
             <SurveyQuestionControls
-              handleQuestionDelete={() => handleQuestionDelete(question.id)}
-              handleQuestionCopy={() => handleQuestionCopy(question.id)}
+              handleQuestionDelete={() => dispatch(deleteQuestion(question.id))}
+              handleQuestionCopy={() => dispatch(copyQuestion(question.id))}
               question={question.id}
             />
           </SurveyQuestionBox>
@@ -54,7 +43,7 @@ const SurveyQuestion = () => {
       </div>
       <AddQuestionWrapper>
         <Tooltip title="질문 추가" placement="right">
-          <StyledControlPointIcon onClick={handleAddQuestion} />
+          <StyledControlPointIcon onClick={() => dispatch(addQuestion())} />
         </Tooltip>
       </AddQuestionWrapper>
     </SurveyQuestionBoxWrapper>
