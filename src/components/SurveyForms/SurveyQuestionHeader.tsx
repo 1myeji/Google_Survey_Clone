@@ -9,25 +9,22 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import EditFormatIcon from '../common/EditFormatIcon';
 import { useDispatch } from 'react-redux';
-import { changeAge } from '../../store/surveyQuestionSlice';
+import { changeAge, changeQuestionTitle } from '../../store/surveyQuestionSlice';
 
 const SurveyQuestionType = ['단답형', '장문형', '객관식 질문', '체크박스', '드롭다운'];
 
 interface ISurveyQuestionHeaderProps {
   id: number;
   age: string;
+  title: string;
 }
 
-const SurveyQuestionHeader = ({ id, age }: ISurveyQuestionHeaderProps) => {
+const SurveyQuestionHeader = ({ id, age, title }: ISurveyQuestionHeaderProps) => {
   const dispatch = useDispatch();
   const [isFocused, setIsFocused] = useState(false);
 
   const handleTextFieldFocus = () => {
     setIsFocused(!isFocused);
-  };
-
-  const handleAgeChange = (id: number, age: string) => {
-    dispatch(changeAge({ id, age }));
   };
 
   return (
@@ -38,18 +35,22 @@ const SurveyQuestionHeader = ({ id, age }: ISurveyQuestionHeaderProps) => {
       <TitleTextFieldWrapper>
         <TitleTextField
           placeholder="질문"
-          id="filled-hidden-label-normal"
+          value={title}
           variant="filled"
           multiline
+          color="secondary"
           onFocus={handleTextFieldFocus}
           onBlur={handleTextFieldFocus}
-          color="secondary"
+          onChange={event => dispatch(changeQuestionTitle({ id, title: event.target.value }))}
         />
         <IconButton>
           <CropOriginalIcon />
         </IconButton>
         <FormControl sx={{ minWidth: 190, marginLeft: 2 }}>
-          <Select value={age} onChange={event => handleAgeChange(id, String(event?.target.value))}>
+          <Select
+            value={age}
+            onChange={event => dispatch(changeAge({ id, age: String(event.target.value) }))}
+          >
             {SurveyQuestionType.map((type, index) => (
               <MenuItem value={(index + 1) * 10} key={type}>
                 {type}

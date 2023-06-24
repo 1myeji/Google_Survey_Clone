@@ -11,13 +11,18 @@ import { RootState } from '../../store/store';
 const SurveyQuestion = () => {
   const questions = useSelector((state: RootState) => state.surveyQuestion);
   const dispatch = useDispatch();
+  console.log(questions);
 
   return (
     <SurveyQuestionBoxWrapper>
       <div>
         {questions.map(question => (
           <SurveyQuestionBox key={question.id}>
-            <SurveyQuestionHeader id={question.id} age={question.age} />
+            <SurveyQuestionHeader
+              id={question.id}
+              age={question.age}
+              title={question.questionTitle}
+            />
             <SurveyQuestionAnswer age={question.age} />
             <SurveyQuestionControls id={question.id} />
           </SurveyQuestionBox>

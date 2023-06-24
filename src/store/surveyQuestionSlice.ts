@@ -35,19 +35,21 @@ const surveyQuestion = createSlice({
     },
     copyQuestion(state, action) {
       const questionCopy = state.find(question => question.id === action.payload);
-      if (questionCopy) {
-        state.push({ ...questionCopy, id: Math.random() * 10 });
-      }
+      if (questionCopy) state.push({ ...questionCopy, id: Math.random() * 10 });
     },
     changeAge(state, action) {
       const { id, age } = action.payload;
       const question = state.find(question => question.id === id);
-      if (question) {
-        question.age = age;
-      }
+      if (question) question.age = age;
+    },
+    changeQuestionTitle(state, action) {
+      const { id, title } = action.payload;
+      const question = state.find(question => question.id === id);
+      if (question) question.questionTitle = title;
     },
   },
 });
 
-export const { addQuestion, deleteQuestion, copyQuestion, changeAge } = surveyQuestion.actions;
+export const { addQuestion, deleteQuestion, copyQuestion, changeAge, changeQuestionTitle } =
+  surveyQuestion.actions;
 export default surveyQuestion;
