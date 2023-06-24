@@ -8,17 +8,26 @@ import Tooltip from '@mui/material/Tooltip';
 
 const SurveyQuestion = () => {
   const [age, setAge] = useState('30');
+  const [questions, setQuestions] = useState([1]);
+
+  const handleAddQuestion = () => {
+    setQuestions(prev => [...prev, prev.length + 1]);
+  };
 
   return (
     <SurveyQuestionBoxWrapper>
-      <SurveyQuestionBox>
-        <SurveyQuestionHeader age={age} setAge={setAge} />
-        <SurveyQuestionAnswer age={age} />
-        <SurveyQuestionControls />
-      </SurveyQuestionBox>
+      <div>
+        {questions.map(() => (
+          <SurveyQuestionBox>
+            <SurveyQuestionHeader age={age} setAge={setAge} />
+            <SurveyQuestionAnswer age={age} />
+            <SurveyQuestionControls />
+          </SurveyQuestionBox>
+        ))}
+      </div>
       <AddQuestionWrapper>
         <Tooltip title="질문 추가" placement="right">
-          <StyledControlPointIcon />
+          <StyledControlPointIcon onClick={handleAddQuestion} />
         </Tooltip>
       </AddQuestionWrapper>
     </SurveyQuestionBoxWrapper>
