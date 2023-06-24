@@ -1,5 +1,5 @@
 import Checkbox from './SurveyQuestionAnswer/Checkbox';
-import Dropdown from './SurveyQuestionAnswer/Dropdown';
+import DropDown from './SurveyQuestionAnswer/DropDown';
 import LongAnswer from './SurveyQuestionAnswer/LongAnswer';
 import MultipleChoice from './SurveyQuestionAnswer/MultipleChoice ';
 import ShortAnswer from './SurveyQuestionAnswer/ShortAnswer';
@@ -19,7 +19,7 @@ const SurveyQuestionAnswer = ({ age }: ISurveyQuestionAnswerProps) => {
     case '40':
       return <Checkbox />;
     case '50':
-      return <Dropdown />;
+      return <DropDown />;
     default:
       return <div>올바른 질문 유형을 선택해주세요.</div>;
   }

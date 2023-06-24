@@ -1,5 +1,7 @@
+import OptionGroup from './OptionGroup';
+
 const Checkbox = () => {
-  return <div>Checkbox</div>;
+  return <OptionGroup type="checkbox" />;
 };
 
 export default Checkbox;

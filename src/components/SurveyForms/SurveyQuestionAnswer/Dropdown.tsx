@@ -1,5 +1,7 @@
-const Dropdown = () => {
-  return <div>Dropdown</div>;
+import OptionGroup from './OptionGroup';
+
+const DropDown = () => {
+  return <OptionGroup type="dropdown" />;
 };
 
-export default Dropdown;
+export default DropDown;

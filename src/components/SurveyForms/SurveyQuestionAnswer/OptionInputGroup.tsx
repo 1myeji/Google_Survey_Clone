@@ -2,37 +2,20 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import Input from '@mui/material/Input';
-import Radio from '@mui/material/Radio';
 import styled from 'styled-components';
 
 const ariaLabel = { 'aria-label': 'description' };
 
-interface IRadioInputGroupProps {
+interface IOptionInputGroupProps {
   option: number;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  selectedValue: string;
-  handleRadioBlur: () => void;
   handleOptionDelete: (optionDelete: number) => void;
+  children: JSX.Element;
 }
 
-const RadioInputGroup = ({
-  option,
-  handleChange,
-  selectedValue,
-  handleRadioBlur,
-  handleOptionDelete,
-}: IRadioInputGroupProps) => {
+const OptionInputGroup = ({ option, handleOptionDelete, children }: IOptionInputGroupProps) => {
   return (
     <RadioInputGroupWrapper>
-      <Radio
-        checked={selectedValue === 'a'}
-        onChange={handleChange}
-        value="a"
-        name="radio-buttons"
-        inputProps={{ 'aria-label': 'A' }}
-        onBlur={handleRadioBlur}
-        disabled
-      />
+      {children}
       <OptionInput
         defaultValue={`옵션 ${option}`}
         inputProps={ariaLabel}
@@ -40,15 +23,15 @@ const RadioInputGroup = ({
         disableUnderline
       />
       <Tooltip title="삭제" onClick={() => handleOptionDelete(option)}>
-        <IconButton>
+        <StyledIconButton>
           <ClearIcon />
-        </IconButton>
+        </StyledIconButton>
       </Tooltip>
     </RadioInputGroupWrapper>
   );
 };
 
-export default RadioInputGroup;
+export default OptionInputGroup;
 
 const OptionInput = styled(Input)`
   width: 530px;
@@ -57,4 +40,8 @@ const OptionInput = styled(Input)`
 const RadioInputGroupWrapper = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const StyledIconButton = styled(IconButton)`
+  margin-left: 65px;
 `;
