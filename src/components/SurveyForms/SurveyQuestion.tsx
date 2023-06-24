@@ -7,21 +7,48 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import Tooltip from '@mui/material/Tooltip';
 
 const SurveyQuestion = () => {
-  const [age, setAge] = useState('30');
-  const [questions, setQuestions] = useState([1]);
+  const [questions, setQuestions] = useState([{ id: Math.random() * 10, age: '30' }]);
 
   const handleAddQuestion = () => {
-    setQuestions(prev => [...prev, prev.length + 1]);
+    setQuestions(prev => [...prev, { id: Math.random() * 10, age: '30' }]);
   };
+
+  const handleQuestionDelete = (questionDelete: number) => {
+    setQuestions(prev => prev.filter(question => question.id !== questionDelete));
+  };
+
+  const handleQuestionCopy = (questionCopyId: number) => {
+    const questionCopy = questions.find(question => question.id === questionCopyId);
+    if (questionCopy) {
+      const newQuestion = { ...questionCopy, id: Math.random() * 10 };
+      setQuestions(prev => [...prev, newQuestion]);
+    }
+  };
+
+  const handleAgeChange = (id: number, age: string) => {
+    setQuestions(prev =>
+      prev.map(question => (question.id === id ? { ...question, age } : question)),
+    );
+  };
+
+  console.log(questions);
 
   return (
     <SurveyQuestionBoxWrapper>
       <div>
-        {questions.map(() => (
-          <SurveyQuestionBox>
-            <SurveyQuestionHeader age={age} setAge={setAge} />
-            <SurveyQuestionAnswer age={age} />
-            <SurveyQuestionControls />
+        {questions.map(question => (
+          <SurveyQuestionBox key={question.id}>
+            <SurveyQuestionHeader
+              id={question.id}
+              age={question.age}
+              handleAgeChange={handleAgeChange}
+            />
+            <SurveyQuestionAnswer age={question.age} />
+            <SurveyQuestionControls
+              handleQuestionDelete={() => handleQuestionDelete(question.id)}
+              handleQuestionCopy={() => handleQuestionCopy(question.id)}
+              question={question.id}
+            />
           </SurveyQuestionBox>
         ))}
       </div>

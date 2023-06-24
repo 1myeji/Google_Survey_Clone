@@ -5,23 +5,20 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import CropOriginalIcon from '@mui/icons-material/CropOriginal';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import EditFormatIcon from '../common/EditFormatIcon';
 
 const SurveyQuestionType = ['단답형', '장문형', '객관식 질문', '체크박스', '드롭다운'];
 
 interface ISurveyQuestionHeaderProps {
+  id: number;
   age: string;
-  setAge: React.Dispatch<React.SetStateAction<string>>;
+  handleAgeChange: (id: number, age: string) => void;
 }
 
-const SurveyQuestionHeader = ({ age, setAge }: ISurveyQuestionHeaderProps) => {
+const SurveyQuestionHeader = ({ id, age, handleAgeChange }: ISurveyQuestionHeaderProps) => {
   const [isFocused, setIsFocused] = useState(false);
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(String(event.target.value));
-  };
 
   const handleTextFieldFocus = () => {
     setIsFocused(!isFocused);
@@ -46,7 +43,7 @@ const SurveyQuestionHeader = ({ age, setAge }: ISurveyQuestionHeaderProps) => {
           <CropOriginalIcon />
         </IconButton>
         <FormControl sx={{ minWidth: 190, marginLeft: 2 }}>
-          <Select value={age} onChange={handleChange}>
+          <Select value={age} onChange={event => handleAgeChange(id, String(event?.target.value))}>
             {SurveyQuestionType.map((type, index) => (
               <MenuItem value={(index + 1) * 10} key={type}>
                 {type}

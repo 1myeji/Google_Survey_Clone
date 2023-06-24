@@ -7,16 +7,26 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const SurveyQuestionControls = () => {
+interface ISurveyQuestionControlProps {
+  handleQuestionDelete: (questionDelete: number) => void;
+  handleQuestionCopy: (questionCopy: number) => void;
+  question: number;
+}
+
+const SurveyQuestionControls = ({
+  handleQuestionDelete,
+  handleQuestionCopy,
+  question,
+}: ISurveyQuestionControlProps) => {
   return (
     <ControlsWrapper>
       <Tooltip title="복사">
-        <IconButton>
+        <IconButton onClick={() => handleQuestionCopy(question)}>
           <ContentCopyIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="삭제">
-        <IconButton>
+        <IconButton onClick={() => handleQuestionDelete(question)}>
           <DeleteOutlineIcon />
         </IconButton>
       </Tooltip>
