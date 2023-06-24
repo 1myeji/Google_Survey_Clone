@@ -83,6 +83,14 @@ const surveyQuestion = createSlice({
         question.questionOptions[index].optionTitle = title;
       }
     },
+
+    toggleEssential: (state, action) => {
+      const { id } = action.payload;
+      const question = state.find(question => question.id === id);
+      if (question) {
+        question.essential = !question.essential;
+      }
+    },
   },
 });
 
@@ -95,5 +103,6 @@ export const {
   addOption,
   deleteOption,
   changeOptionTitle,
+  toggleEssential,
 } = surveyQuestion.actions;
 export default surveyQuestion;

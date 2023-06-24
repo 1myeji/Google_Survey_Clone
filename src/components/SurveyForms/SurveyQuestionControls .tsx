@@ -7,14 +7,19 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDispatch } from 'react-redux';
-import { copyQuestion, deleteQuestion } from '../../store/surveyQuestionSlice';
+import { copyQuestion, deleteQuestion, toggleEssential } from '../../store/surveyQuestionSlice';
 
 interface ISurveyQuestionControlProps {
   id: number;
+  essential: boolean;
 }
 
-const SurveyQuestionControls = ({ id }: ISurveyQuestionControlProps) => {
+const SurveyQuestionControls = ({ id, essential }: ISurveyQuestionControlProps) => {
   const dispatch = useDispatch();
+
+  const handleToggleEssential = () => {
+    dispatch(toggleEssential({ id }));
+  };
 
   return (
     <ControlsWrapper>
@@ -31,7 +36,7 @@ const SurveyQuestionControls = ({ id }: ISurveyQuestionControlProps) => {
       <Line />
       <FormControlLabel
         value="필수"
-        control={<Switch color="secondary" />}
+        control={<Switch color="secondary" onChange={handleToggleEssential} checked={essential} />}
         label="필수"
         labelPlacement="start"
       />

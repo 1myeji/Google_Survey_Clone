@@ -24,7 +24,7 @@ const SurveyQuestion = () => {
               title={question.questionTitle}
             />
             <SurveyQuestionAnswer age={question.age} questionId={question.id} />
-            <SurveyQuestionControls id={question.id} />
+            <SurveyQuestionControls id={question.id} essential={question.essential} />
           </SurveyQuestionBox>
         ))}
       </div>

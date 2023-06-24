@@ -14,12 +14,11 @@ const ariaLabel = { 'aria-label': 'description' };
 
 interface IOptionInputGroupProps {
   index: number;
-  id: number;
   options: surveyQuestionState;
   children: JSX.Element;
 }
 
-const OptionInputGroup = ({ index, id, options, children }: IOptionInputGroupProps) => {
+const OptionInputGroup = ({ index, options, children }: IOptionInputGroupProps) => {
   const dispatch = useDispatch();
 
   const handleOptionTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

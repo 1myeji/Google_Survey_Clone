@@ -29,7 +29,7 @@ const OptionGroup = ({ type, questionId }: IOptionGroupProps) => {
   return (
     <OptionGroupWrapper>
       {options?.questionOptions.map((option, index) => (
-        <OptionInputGroup key={option.id} index={index} id={option.id} options={options}>
+        <OptionInputGroup key={option.id} index={index} options={options}>
           <InputIcon value={`${index + 1}`} disabled={true} />
         </OptionInputGroup>
       ))}
