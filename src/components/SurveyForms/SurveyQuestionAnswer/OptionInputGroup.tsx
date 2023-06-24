@@ -1,7 +1,6 @@
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
-import Input from '@mui/material/Input';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import {
@@ -9,8 +8,7 @@ import {
   deleteOption,
   surveyQuestionState,
 } from '../../../store/surveyQuestionSlice';
-
-const ariaLabel = { 'aria-label': 'description' };
+import SurveyInput from '../../common/SurveyInput';
 
 interface IOptionInputGroupProps {
   index: number;
@@ -28,12 +26,9 @@ const OptionInputGroup = ({ index, options, children }: IOptionInputGroupProps) 
   return (
     <RadioInputGroupWrapper>
       {children}
-      <OptionInput
+      <SurveyInput
         value={options.questionOptions[index].optionTitle || `옵션 ${index + 1}`}
-        inputProps={ariaLabel}
-        color="secondary"
-        disableUnderline
-        onChange={handleOptionTitleChange}
+        handleContentChange={handleOptionTitleChange}
       />
       <Tooltip title="삭제" onClick={() => dispatch(deleteOption({ id: options.id, index }))}>
         <StyledIconButton>
@@ -45,10 +40,6 @@ const OptionInputGroup = ({ index, options, children }: IOptionInputGroupProps) 
 };
 
 export default OptionInputGroup;
-
-const OptionInput = styled(Input)`
-  width: 530px;
-`;
 
 const RadioInputGroupWrapper = styled.div`
   display: flex;

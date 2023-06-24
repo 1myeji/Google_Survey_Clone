@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { changeSurveyInfo } from '../../store/surveyInfoSlice';
+import SurveyInput from '../common/SurveyInput';
 
 const SurveyInfoInput = () => {
   const dispatch = useDispatch();
@@ -15,12 +16,16 @@ const SurveyInfoInput = () => {
 
   return (
     <Header>
-      <Title
+      <SurveyInput
         defaultValue="제목 없는 설문지"
-        placeholder="설문지 제목"
-        onChange={handleTitleChange}
+        handleContentChange={handleTitleChange}
+        sx={{ fontSize: '32px', paddingBottom: '8px' }}
       />
-      <Description placeholder="설문지 설명" onChange={handleDescriptionChange} />
+      <SurveyInput
+        placeholder="설문지 설명"
+        handleContentChange={handleDescriptionChange}
+        sx={{ paddingBottom: '5px', paddingLeft: '3px' }}
+      />
     </Header>
   );
 };
@@ -30,15 +35,4 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   padding: 30px 24px 24px 24px;
-`;
-
-const Title = styled.input`
-  margin-bottom: 20px;
-  font-size: 32px;
-  padding-bottom: 8px;
-`;
-
-const Description = styled.input`
-  padding-bottom: 5px;
-  padding-left: 3px;
 `;
