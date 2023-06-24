@@ -34,8 +34,11 @@ const surveyQuestion = createSlice({
       return state.filter(question => question.id !== action.payload);
     },
     copyQuestion(state, action) {
-      const questionCopy = state.find(question => question.id === action.payload);
-      if (questionCopy) state.push({ ...questionCopy, id: Math.random() * 10 });
+      const questionIndex = state.findIndex(question => question.id === action.payload);
+      if (questionIndex !== -1) {
+        const questionCopy = { ...state[questionIndex], id: Math.random() * 10 };
+        state.splice(questionIndex + 1, 0, questionCopy);
+      }
     },
     changeAge(state, action) {
       const { id, age } = action.payload;
