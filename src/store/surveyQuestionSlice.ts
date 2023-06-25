@@ -19,7 +19,7 @@ const initialState: surveyQuestionState[] = [
     age: '30',
     questionTitle: '',
     questionAnswer: '',
-    questionOptions: [{ id: Date.now(), optionTitle: '', checked: false }],
+    questionOptions: [{ id: Date.now(), optionTitle: '옵션1', checked: false }],
     essential: false,
   },
 ];
@@ -34,7 +34,7 @@ const surveyQuestion = createSlice({
         age: '30',
         questionTitle: '',
         questionAnswer: '',
-        questionOptions: [{ id: Date.now(), optionTitle: '', checked: false }],
+        questionOptions: [{ id: Date.now(), optionTitle: '옵션1', checked: false }],
         essential: false,
       });
     },
@@ -68,7 +68,11 @@ const surveyQuestion = createSlice({
       const { questionId } = action.payload;
       const question = state.find(question => question.id === questionId);
       if (question) {
-        question.questionOptions.push({ id: Date.now(), optionTitle: '', checked: false });
+        question.questionOptions.push({
+          id: Date.now(),
+          optionTitle: `옵션${question.questionOptions.length + 1}`,
+          checked: false,
+        });
       }
     },
 
