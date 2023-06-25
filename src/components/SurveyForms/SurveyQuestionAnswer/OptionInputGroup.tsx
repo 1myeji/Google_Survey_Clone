@@ -29,11 +29,12 @@ const OptionInputGroup = ({ index, options, children }: IOptionInputGroupProps) 
       <SurveyInput
         value={options.questionOptions[index].optionTitle || `옵션 ${index + 1}`}
         handleContentChange={handleOptionTitleChange}
+        sx={{ width: '600px' }}
       />
       <Tooltip title="삭제" onClick={() => dispatch(deleteOption({ id: options.id, index }))}>
-        <StyledIconButton>
+        <IconButton>
           <ClearIcon />
-        </StyledIconButton>
+        </IconButton>
       </Tooltip>
     </RadioInputGroupWrapper>
   );
@@ -44,8 +45,4 @@ export default OptionInputGroup;
 const RadioInputGroupWrapper = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const StyledIconButton = styled(IconButton)`
-  margin-left: 65px;
 `;
