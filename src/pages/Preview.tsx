@@ -3,6 +3,7 @@ import SurveyInfo from '../components/common/SurveyInfo';
 import { RootState } from '../store/store';
 import styled from 'styled-components';
 import PreviewQuestion from '../components/Preview/PreviewQuestion';
+import { Button } from '@mui/material';
 
 const Preview = () => {
   const surveyInfo = useSelector((state: RootState) => state.surveyInfo);
@@ -17,6 +18,10 @@ const Preview = () => {
       {surveyQuestion.map(question => (
         <PreviewQuestion key={question.id} question={question} />
       ))}
+      <ButtonContainer>
+        <SubmitButton variant="contained">제출</SubmitButton>
+        <ClearButton variant="outlined">양식 지우기</ClearButton>
+      </ButtonContainer>
     </>
   );
 };
@@ -34,4 +39,24 @@ const Description = styled.p`
   padding-bottom: 5px;
   padding-left: 3px;
   margin-left: 16px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  margin: 20px;
+  gap: 530px;
+`;
+
+const SubmitButton = styled(Button)`
+  background-color: purple;
+  color: white;
+`;
+
+const ClearButton = styled(Button)`
+  color: purple;
+  border: none;
+  &:hover {
+    border: none;
+    background-color: lightgray;
+  }
 `;
