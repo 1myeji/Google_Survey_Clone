@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import SurveyInfo from '../components/common/SurveyInfo';
 import { RootState } from '../store/store';
 import styled from 'styled-components';
-import PreviewQuestion from '../components/SurveyForms/PreviewQuestion';
+import PreviewQuestion from '../components/Preview/PreviewQuestion';
 
 const Preview = () => {
   const surveyInfo = useSelector((state: RootState) => state.surveyInfo);

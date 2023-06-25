@@ -8,6 +8,7 @@ export interface surveyQuestionState {
   questionOptions: {
     id: number;
     optionTitle: string;
+    checked: boolean;
   }[];
   essential: boolean;
 }
@@ -18,7 +19,7 @@ const initialState: surveyQuestionState[] = [
     age: '30',
     questionTitle: '',
     questionAnswer: '',
-    questionOptions: [{ id: Date.now(), optionTitle: '' }],
+    questionOptions: [{ id: Date.now(), optionTitle: '', checked: false }],
     essential: false,
   },
 ];
@@ -33,7 +34,7 @@ const surveyQuestion = createSlice({
         age: '30',
         questionTitle: '',
         questionAnswer: '',
-        questionOptions: [{ id: Date.now(), optionTitle: '' }],
+        questionOptions: [{ id: Date.now(), optionTitle: '', checked: false }],
         essential: false,
       });
     },
@@ -67,7 +68,7 @@ const surveyQuestion = createSlice({
       const { questionId } = action.payload;
       const question = state.find(question => question.id === questionId);
       if (question) {
-        question.questionOptions.push({ id: Date.now(), optionTitle: '' });
+        question.questionOptions.push({ id: Date.now(), optionTitle: '', checked: false });
       }
     },
 
@@ -102,6 +103,25 @@ const surveyQuestion = createSlice({
         question.questionAnswer = answer;
       }
     },
+
+    changeOptionCheck: (state, action) => {
+      const { id, index } = action.payload;
+      const question = state.find(question => question.id === id);
+      if (question) {
+        question.questionOptions.forEach(option => {
+          option.checked = false;
+        });
+        question.questionOptions[index].checked = true;
+      }
+    },
+
+    changeCheckBox: (state, action) => {
+      const { id, index } = action.payload;
+      const question = state.find(question => question.id === id);
+      if (question) {
+        question.questionOptions[index].checked = !question.questionOptions[index].checked;
+      }
+    },
   },
 });
 
@@ -116,5 +136,7 @@ export const {
   changeOptionTitle,
   toggleEssential,
   changeQuestionAnswer,
+  changeOptionCheck,
+  changeCheckBox,
 } = surveyQuestion.actions;
 export default surveyQuestion;

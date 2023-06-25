@@ -1,8 +1,8 @@
 import { surveyQuestionState } from '../../store/surveyQuestionSlice';
-import PreviewCheckbox from '../Preview/PreviewCheckbox';
-import PreviewDropDown from '../Preview/PreviewDropDown';
-import PreviewMultipleChoice from '../Preview/PreviewMultipleChoice';
-import PreviewTextAnswer from '../Preview/PreviewTextAnswer';
+import PreviewCheckbox from './PreviewCheckbox';
+import PreviewDropDown from './PreviewDropDown';
+import PreviewMultipleChoice from './PreviewMultipleChoice';
+import PreviewTextAnswer from './PreviewTextAnswer';
 import SurveyInfo from '../common/SurveyInfo';
 
 interface IPreviewQuestionProps {

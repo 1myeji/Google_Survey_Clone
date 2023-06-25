@@ -1,31 +1,33 @@
-import { useState } from 'react';
 import Radio from '@mui/material/Radio';
+import { useDispatch } from 'react-redux';
+import { changeOptionCheck } from '../../store/surveyQuestionSlice';
 
 interface IRadioIconProps {
   value?: string;
   disabled: boolean;
+  sx?: any;
+  id?: number;
+  index?: number;
+  checked?: boolean;
 }
 
-const RadioIcon = ({ value, disabled }: IRadioIconProps) => {
-  const [selectedValue, setSelectedValue] = useState('');
+const RadioIcon = ({ value, disabled, sx, id, index, checked }: IRadioIconProps) => {
+  const dispatch = useDispatch();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event.target.value);
-  };
-
-  const handleRadioBlur = () => {
-    setSelectedValue('');
+  const handleCheckedChange = () => {
+    dispatch(changeOptionCheck({ id, index }));
   };
 
   return (
     <Radio
-      checked={selectedValue === value}
-      onChange={handleChange}
+      checked={checked}
+      onChange={handleCheckedChange}
       value={value}
       name="radio-buttons"
+      color="secondary"
       inputProps={{ 'aria-label': 'A' }}
-      onBlur={handleRadioBlur}
       disabled={disabled}
+      sx={sx}
     />
   );
 };

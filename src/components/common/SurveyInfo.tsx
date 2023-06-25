@@ -21,7 +21,6 @@ const SectionContainer = styled.section`
   border-radius: 8px;
   background-color: #fff;
   width: 700px;
-  height: 136px;
   margin-top: 10px;
   position: relative;
 `;
