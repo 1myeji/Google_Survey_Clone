@@ -39,9 +39,7 @@ const PreviewQuestion = ({ question, isSubmitted }: IPreviewQuestionProps) => {
       case '20':
         return !question.questionAnswer;
       case '30':
-        return !question.questionOptions.some(option => option.checked);
       case '40':
-        return !question.questionOptions.some(option => option.checked);
       case '50':
         return !question.questionOptions.some(option => option.checked);
       default:

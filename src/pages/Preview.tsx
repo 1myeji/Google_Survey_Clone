@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import PreviewQuestion from '../components/Preview/PreviewQuestion';
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Preview = () => {
   const surveyInfo = useSelector((state: RootState) => state.surveyInfo);
@@ -12,8 +13,24 @@ const Preview = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const navigate = useNavigate();
+
+  const isRequiredAnswered = () => {
+    return surveyQuestion.every(question => {
+      if (!question.essential) return true;
+      if (['10', '20'].includes(question.age)) return !!question.questionAnswer;
+      if (['30', '40', '50'].includes(question.age)) {
+        return question.questionOptions.some(option => option.checked);
+      }
+      return false;
+    });
+  };
+
   const handleSubmit = () => {
     setIsSubmitted(true);
+    if (isRequiredAnswered()) {
+      navigate('/submit');
+    }
   };
 
   return (
