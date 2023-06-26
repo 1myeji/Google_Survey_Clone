@@ -3,11 +3,12 @@ import styled from 'styled-components';
 interface SurveyInfoProps {
   children: React.ReactNode;
   includePurpleBox?: boolean;
+  isEmpty?: boolean;
 }
 
-const SurveyInfo = ({ children, includePurpleBox = false }: SurveyInfoProps) => {
+const SurveyInfo = ({ children, includePurpleBox = false, isEmpty }: SurveyInfoProps) => {
   return (
-    <SectionContainer>
+    <SectionContainer isEmpty={isEmpty}>
       {includePurpleBox && <PurpleBox></PurpleBox>}
       {children}
     </SectionContainer>
@@ -16,8 +17,9 @@ const SurveyInfo = ({ children, includePurpleBox = false }: SurveyInfoProps) => 
 
 export default SurveyInfo;
 
-const SectionContainer = styled.section`
+const SectionContainer = styled.section<{ isEmpty?: boolean }>`
   border: 1px solid #dadce0;
+  border-color: ${({ isEmpty }) => (isEmpty ? 'red' : '#dadce0')};
   border-radius: 8px;
   background-color: #fff;
   width: 700px;

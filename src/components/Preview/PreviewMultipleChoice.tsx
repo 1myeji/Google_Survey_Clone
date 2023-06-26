@@ -1,6 +1,7 @@
 import { surveyQuestionState } from '../../store/surveyQuestionSlice';
 import RadioIcon from '../common/RadioIcon';
 import styled from 'styled-components';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 interface IPreviewMultipleChoiceProps {
   question: surveyQuestionState;
 }

@@ -15,12 +15,14 @@ const PreviewTextAnswer = ({ question, width }: IPreviewTextAnswerProps) => {
   };
 
   return (
-    <SurveyInput
-      handleContentChange={handleAnswerChange}
-      placeholder="내 답변"
-      sx={{ marginLeft: '20px', marginTop: '30px', width }}
-      IsDisableUnderline={false}
-    />
+    <>
+      <SurveyInput
+        handleContentChange={handleAnswerChange}
+        placeholder="내 답변"
+        sx={{ marginLeft: '20px', marginTop: '30px', width }}
+        IsDisableUnderline={false}
+      />
+    </>
   );
 };
 

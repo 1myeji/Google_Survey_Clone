@@ -4,10 +4,17 @@ import { RootState } from '../store/store';
 import styled from 'styled-components';
 import PreviewQuestion from '../components/Preview/PreviewQuestion';
 import { Button } from '@mui/material';
+import { useState } from 'react';
 
 const Preview = () => {
   const surveyInfo = useSelector((state: RootState) => state.surveyInfo);
   const surveyQuestion = useSelector((state: RootState) => state.surveyQuestion);
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = () => {
+    setIsSubmitted(true);
+  };
 
   return (
     <>
@@ -16,10 +23,12 @@ const Preview = () => {
         <Description>{surveyInfo.description}</Description>
       </SurveyInfo>
       {surveyQuestion.map(question => (
-        <PreviewQuestion key={question.id} question={question} />
+        <PreviewQuestion key={question.id} question={question} isSubmitted={isSubmitted} />
       ))}
       <ButtonContainer>
-        <SubmitButton variant="contained">제출</SubmitButton>
+        <SubmitButton variant="contained" onClick={handleSubmit}>
+          제출
+        </SubmitButton>
         <ClearButton variant="outlined">양식 지우기</ClearButton>
       </ButtonContainer>
     </>
