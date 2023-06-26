@@ -10,7 +10,7 @@ const PreviewCheckbox = ({ question }: IPreviewCheckboxProps) => {
   return (
     <>
       {question.questionOptions.map((option, index) => (
-        <OptionWrapper>
+        <OptionWrapper key={option.id}>
           <CheckBoxIcon
             disabled={false}
             id={question.id}

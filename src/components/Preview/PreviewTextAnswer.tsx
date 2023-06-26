@@ -9,7 +9,6 @@ interface IPreviewTextAnswerProps {
 
 const PreviewTextAnswer = ({ question, width }: IPreviewTextAnswerProps) => {
   const dispatch = useDispatch();
-
   const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeQuestionAnswer({ id: question.id, answer: event.target.value }));
   };
@@ -17,6 +16,7 @@ const PreviewTextAnswer = ({ question, width }: IPreviewTextAnswerProps) => {
   return (
     <>
       <SurveyInput
+        value={question.questionAnswer}
         handleContentChange={handleAnswerChange}
         placeholder="내 답변"
         sx={{ marginLeft: '20px', marginTop: '30px', width }}

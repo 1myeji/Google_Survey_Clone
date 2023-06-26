@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SurveyInfo from '../components/common/SurveyInfo';
 import { RootState } from '../store/store';
 import styled from 'styled-components';
@@ -6,14 +6,14 @@ import PreviewQuestion from '../components/Preview/PreviewQuestion';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { resetForm } from '../store/surveyQuestionSlice';
 
 const Preview = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const surveyInfo = useSelector((state: RootState) => state.surveyInfo);
   const surveyQuestion = useSelector((state: RootState) => state.surveyQuestion);
-
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const navigate = useNavigate();
 
   const isRequiredAnswered = () => {
     return surveyQuestion.every(question => {
@@ -33,6 +33,10 @@ const Preview = () => {
     }
   };
 
+  const handleClearClick = () => {
+    dispatch(resetForm());
+  };
+
   return (
     <>
       <SurveyInfo includePurpleBox={true}>
@@ -46,7 +50,9 @@ const Preview = () => {
         <SubmitButton variant="contained" onClick={handleSubmit}>
           제출
         </SubmitButton>
-        <ClearButton variant="outlined">양식 지우기</ClearButton>
+        <ClearButton variant="outlined" onClick={handleClearClick}>
+          양식 지우기
+        </ClearButton>
       </ButtonContainer>
     </>
   );

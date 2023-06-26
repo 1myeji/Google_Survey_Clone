@@ -126,6 +126,17 @@ const surveyQuestion = createSlice({
         question.questionOptions[index].checked = !question.questionOptions[index].checked;
       }
     },
+
+    resetForm: state => {
+      state.forEach(question => {
+        question.questionAnswer = '';
+        if (question.questionOptions) {
+          question.questionOptions.forEach(option => {
+            option.checked = false;
+          });
+        }
+      });
+    },
   },
 });
 
@@ -142,5 +153,6 @@ export const {
   changeQuestionAnswer,
   changeOptionCheck,
   changeCheckBox,
+  resetForm,
 } = surveyQuestion.actions;
 export default surveyQuestion;
