@@ -9,7 +9,6 @@ interface IPreviewCheckboxProps {
 const PreviewCheckbox = ({ question }: IPreviewCheckboxProps) => {
   return (
     <>
-      <CheckboxTitle>{question.questionTitle}</CheckboxTitle>
       {question.questionOptions.map((option, index) => (
         <OptionWrapper>
           <CheckBoxIcon
@@ -28,13 +27,9 @@ const PreviewCheckbox = ({ question }: IPreviewCheckboxProps) => {
 
 export default PreviewCheckbox;
 
-const CheckboxTitle = styled.div`
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-bottom: 10px;
-`;
-
 const OptionWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 8px;
+  margin-left: 5px;
 `;

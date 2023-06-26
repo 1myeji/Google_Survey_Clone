@@ -4,6 +4,7 @@ import PreviewDropDown from './PreviewDropDown';
 import PreviewMultipleChoice from './PreviewMultipleChoice';
 import PreviewTextAnswer from './PreviewTextAnswer';
 import SurveyInfo from '../common/SurveyInfo';
+import styled from 'styled-components';
 
 interface IPreviewQuestionProps {
   question: surveyQuestionState;
@@ -27,7 +28,31 @@ const PreviewQuestion = ({ question }: IPreviewQuestionProps) => {
     }
   };
 
-  return <SurveyInfo>{previewQuestionType()}</SurveyInfo>;
+  return (
+    <SurveyInfo>
+      <QuestionTitle>
+        {question.questionTitle}
+        {question.essential && <RequiredIndicator>*</RequiredIndicator>}
+      </QuestionTitle>
+      <AnswerWrapper>{previewQuestionType()}</AnswerWrapper>
+    </SurveyInfo>
+  );
 };
 
 export default PreviewQuestion;
+
+const QuestionTitle = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+`;
+
+const RequiredIndicator = styled.span`
+  color: red;
+  margin-left: 4px;
+`;
+
+const AnswerWrapper = styled.div`
+  margin-bottom: 20px;
+`;

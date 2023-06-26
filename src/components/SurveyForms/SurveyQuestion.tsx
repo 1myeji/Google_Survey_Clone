@@ -11,7 +11,6 @@ import { RootState } from '../../store/store';
 const SurveyQuestion = () => {
   const questions = useSelector((state: RootState) => state.surveyQuestion);
   const dispatch = useDispatch();
-  console.log(questions);
 
   return (
     <SurveyQuestionBoxWrapper>

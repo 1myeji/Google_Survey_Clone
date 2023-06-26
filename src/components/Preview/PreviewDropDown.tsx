@@ -16,7 +16,6 @@ const PreviewDropDown = ({ question }: IPreviewDropDownProps) => {
 
   return (
     <DropDownWrapper>
-      <DropdownTitle>{question.questionTitle}</DropdownTitle>
       <FormControl sx={{ minWidth: 190, marginLeft: 2 }}>
         <Select
           value={String(question.questionOptions.findIndex(option => option.checked))}
@@ -37,8 +36,6 @@ export default PreviewDropDown;
 
 const DropDownWrapper = styled.div`
   margin: 10px;
-`;
-
-const DropdownTitle = styled.div`
-  margin: 20px 0 20px 20px;
+  margin-top: 8px;
+  margin-left: 5px;
 `;

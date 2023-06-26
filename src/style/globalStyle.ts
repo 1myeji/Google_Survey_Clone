@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     box-sizing: border-box;
     background: #efebf7;
+    margin-bottom: 20px;
   }
   input {
     border: none;

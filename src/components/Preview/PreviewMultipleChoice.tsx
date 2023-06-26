@@ -8,7 +8,6 @@ interface IPreviewMultipleChoiceProps {
 const PreviewMultipleChoice = ({ question }: IPreviewMultipleChoiceProps) => {
   return (
     <>
-      <MultiChoiceTitle>{question.questionTitle}</MultiChoiceTitle>
       {question.questionOptions.map((option, index) => (
         <OptionWrapper>
           <RadioIcon
@@ -28,13 +27,9 @@ const PreviewMultipleChoice = ({ question }: IPreviewMultipleChoiceProps) => {
 
 export default PreviewMultipleChoice;
 
-const MultiChoiceTitle = styled.div`
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-bottom: 10px;
-`;
-
 const OptionWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 8px;
+  margin-left: 5px;
 `;
