@@ -9,7 +9,7 @@ const PreviewMultipleChoice = ({ question }: IPreviewMultipleChoiceProps) => {
   return (
     <>
       {question.questionOptions.map((option, index) => (
-        <OptionWrapper>
+        <OptionWrapper key={option.id}>
           <RadioIcon
             value={String(option.id)}
             disabled={false}

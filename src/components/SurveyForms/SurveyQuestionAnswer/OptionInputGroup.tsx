@@ -29,7 +29,7 @@ const OptionInputGroup = ({ index, options, children }: IOptionInputGroupProps) 
       <SurveyInput
         value={options.questionOptions[index].optionTitle || `옵션 ${index + 1}`}
         handleContentChange={handleOptionTitleChange}
-        sx={{ width: '600px' }}
+        sx={{ width: '570px' }}
       />
       <Tooltip title="삭제" onClick={() => dispatch(deleteOption({ id: options.id, index }))}>
         <IconButton>

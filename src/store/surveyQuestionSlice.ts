@@ -142,6 +142,15 @@ const surveyQuestion = createSlice({
       const [removed] = state.splice(startIndex, 1);
       state.splice(endIndex, 0, removed);
     },
+
+    reorderOptions: (state, action) => {
+      const { questionId, startIndex, endIndex } = action.payload;
+      const question = state.find(question => question.id === questionId);
+      if (question) {
+        const [removedOption] = question.questionOptions.splice(startIndex, 1);
+        question.questionOptions.splice(endIndex, 0, removedOption);
+      }
+    },
   },
 });
 
@@ -160,5 +169,6 @@ export const {
   changeCheckBox,
   resetForm,
   reorderQuestions,
+  reorderOptions,
 } = surveyQuestion.actions;
 export default surveyQuestion;

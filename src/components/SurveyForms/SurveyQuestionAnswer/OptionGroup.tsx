@@ -5,7 +5,9 @@ import CheckBoxIcon from '../../common/CheckBoxIcon';
 import DropDownIcon from '../../common/DropDownIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { addOption } from '../../../store/surveyQuestionSlice';
+import { addOption, reorderOptions } from '../../../store/surveyQuestionSlice';
+import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 const optionType = {
   radio: RadioIcon,
@@ -25,14 +27,43 @@ const OptionGroup = ({ type, questionId }: IOptionGroupProps) => {
   );
 
   const dispatch = useDispatch();
-
+  const handleOnDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return;
+    }
+    dispatch(
+      reorderOptions({
+        questionId: questionId,
+        startIndex: result.source.index,
+        endIndex: result.destination.index,
+      }),
+    );
+  };
   return (
     <OptionGroupWrapper>
-      {options?.questionOptions.map((option, index) => (
-        <OptionInputGroup key={option.id} index={index} options={options}>
-          <InputIcon value={`${index + 1}`} disabled={true} />
-        </OptionInputGroup>
-      ))}
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId="options">
+          {provided => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {options?.questionOptions.map((option, index) => (
+                <Draggable key={String(option.id)} draggableId={String(option.id)} index={index}>
+                  {provided => (
+                    <Wrap ref={provided.innerRef} {...provided.draggableProps}>
+                      <DragIndicatorWrapper {...provided.dragHandleProps}>
+                        <DragIndicatorIcon />
+                      </DragIndicatorWrapper>
+                      <OptionInputGroup index={index} options={options}>
+                        <InputIcon value={`${index + 1}`} disabled={true} />
+                      </OptionInputGroup>
+                    </Wrap>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
       <InputGroupWrapper>
         <InputIcon disabled={true} value={options && String(options.questionOptions.length + 1)} />
         <AddOption
@@ -67,4 +98,16 @@ const InputGroupWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-top: 10px;
+  margin-left: 24px;
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const DragIndicatorWrapper = styled.div`
+  cursor: move !important;
+  opacity: 0.2;
+  padding-top: 2px;
 `;
