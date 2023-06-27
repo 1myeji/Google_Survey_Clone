@@ -1,5 +1,5 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
+import 'symbol-observable';
 import App from './App.tsx';
 import GlobalStyle from './style/globalStyle.ts';
 import { Provider } from 'react-redux';

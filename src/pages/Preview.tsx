@@ -71,6 +71,7 @@ const Description = styled.p`
   padding-bottom: 5px;
   padding-left: 3px;
   margin-left: 16px;
+  margin-bottom: 16px;
 `;
 
 const ButtonContainer = styled.div`
