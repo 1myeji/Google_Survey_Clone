@@ -15,7 +15,7 @@ export interface surveyQuestionState {
 
 const initialState: surveyQuestionState[] = [
   {
-    id: Math.random() * 10,
+    id: Date.now(),
     age: '30',
     questionTitle: '',
     questionAnswer: '',
@@ -30,7 +30,7 @@ const surveyQuestion = createSlice({
   reducers: {
     addQuestion: state => {
       state.push({
-        id: Math.random() * 10,
+        id: Date.now(),
         age: '30',
         questionTitle: '',
         questionAnswer: '',
@@ -47,8 +47,7 @@ const surveyQuestion = createSlice({
       const questionIndex = state.findIndex(question => question.id === action.payload);
       if (questionIndex !== -1) {
         const questionCopy = JSON.parse(JSON.stringify(state[questionIndex]));
-        questionCopy.id = Math.random() * 10;
-        state.splice(questionIndex + 1, 0, questionCopy);
+        (questionCopy.id = Date.now()), state.splice(questionIndex + 1, 0, questionCopy);
       }
     },
 
@@ -137,6 +136,12 @@ const surveyQuestion = createSlice({
         }
       });
     },
+
+    reorderQuestions: (state, action) => {
+      const { startIndex, endIndex } = action.payload;
+      const [removed] = state.splice(startIndex, 1);
+      state.splice(endIndex, 0, removed);
+    },
   },
 });
 
@@ -154,5 +159,6 @@ export const {
   changeOptionCheck,
   changeCheckBox,
   resetForm,
+  reorderQuestions,
 } = surveyQuestion.actions;
 export default surveyQuestion;

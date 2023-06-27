@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import EditFormatIcon from '../common/EditFormatIcon';
 import { useDispatch } from 'react-redux';
 import { changeAge, changeQuestionTitle } from '../../store/surveyQuestionSlice';
+import { DraggableProvided } from 'react-beautiful-dnd';
 
 const SurveyQuestionType = ['단답형', '장문형', '객관식 질문', '체크박스', '드롭다운'];
 
@@ -17,9 +18,10 @@ interface ISurveyQuestionHeaderProps {
   id: number;
   age: string;
   title: string;
+  dragHandleProps: DraggableProvided['dragHandleProps'];
 }
 
-const SurveyQuestionHeader = ({ id, age, title }: ISurveyQuestionHeaderProps) => {
+const SurveyQuestionHeader = ({ id, age, title, dragHandleProps }: ISurveyQuestionHeaderProps) => {
   const dispatch = useDispatch();
   const [isFocused, setIsFocused] = useState(false);
 
@@ -29,7 +31,7 @@ const SurveyQuestionHeader = ({ id, age, title }: ISurveyQuestionHeaderProps) =>
 
   return (
     <>
-      <DragIndicatorWrapper>
+      <DragIndicatorWrapper {...dragHandleProps}>
         <DragDropIndicatorIcon />
       </DragIndicatorWrapper>
       <TitleTextFieldWrapper>
@@ -85,7 +87,7 @@ const DragDropIndicatorIcon = styled(DragIndicatorIcon)`
 `;
 
 const DragIndicatorWrapper = styled.div`
-  cursor: move;
+  cursor: move !important;
   display: flex;
   justify-content: center;
   opacity: 0.2;

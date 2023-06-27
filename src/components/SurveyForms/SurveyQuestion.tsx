@@ -5,28 +5,55 @@ import SurveyQuestionAnswer from './SurveyQuestionAnswer';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import Tooltip from '@mui/material/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
-import { addQuestion } from '../../store/surveyQuestionSlice';
+import { addQuestion, reorderQuestions } from '../../store/surveyQuestionSlice';
 import { RootState } from '../../store/store';
+import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 
 const SurveyQuestion = () => {
   const questions = useSelector((state: RootState) => state.surveyQuestion);
   const dispatch = useDispatch();
 
+  const handleOnDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+    dispatch(
+      reorderQuestions({
+        startIndex: result.source.index,
+        endIndex: result.destination.index,
+      }),
+    );
+  };
+
   return (
     <SurveyQuestionBoxWrapper>
-      <div>
-        {questions.map(question => (
-          <SurveyQuestionBox key={question.id}>
-            <SurveyQuestionHeader
-              id={question.id}
-              age={question.age}
-              title={question.questionTitle}
-            />
-            <SurveyQuestionAnswer age={question.age} questionId={question.id} />
-            <SurveyQuestionControls id={question.id} essential={question.essential} />
-          </SurveyQuestionBox>
-        ))}
-      </div>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId="questions">
+          {provided => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {questions.map((question, index) => (
+                <Draggable
+                  key={String(question.id)}
+                  draggableId={String(question.id)}
+                  index={index}
+                >
+                  {provided => (
+                    <SurveyQuestionBox ref={provided.innerRef} {...provided.draggableProps}>
+                      <SurveyQuestionHeader
+                        dragHandleProps={provided.dragHandleProps}
+                        id={question.id}
+                        age={question.age}
+                        title={question.questionTitle}
+                      />
+                      <SurveyQuestionAnswer age={question.age} questionId={question.id} />
+                      <SurveyQuestionControls id={question.id} essential={question.essential} />
+                    </SurveyQuestionBox>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
       <AddQuestionWrapper>
         <Tooltip title="질문 추가" placement="right">
           <StyledControlPointIcon onClick={() => dispatch(addQuestion())} />
