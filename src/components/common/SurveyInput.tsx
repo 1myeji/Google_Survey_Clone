@@ -1,5 +1,4 @@
 import Input from '@mui/material/Input';
-import styled from 'styled-components';
 
 const ariaLabel = { 'aria-label': 'description' };
 
@@ -9,7 +8,7 @@ interface ISurveyInputProps {
   defaultValue?: string;
   placeholder?: string;
   sx?: any;
-  IsDisableUnderline?: boolean;
+  isDisableUnderline?: boolean;
 }
 
 const SurveyInput = ({
@@ -18,13 +17,13 @@ const SurveyInput = ({
   defaultValue,
   placeholder,
   sx,
-  IsDisableUnderline = true,
+  isDisableUnderline = true,
 }: ISurveyInputProps) => {
   return (
-    <OptionInput
+    <Input
       inputProps={ariaLabel}
       color="secondary"
-      disableUnderline={IsDisableUnderline}
+      disableUnderline={isDisableUnderline}
       value={value}
       defaultValue={defaultValue}
       onChange={handleContentChange}
@@ -35,7 +34,3 @@ const SurveyInput = ({
 };
 
 export default SurveyInput;
-
-const OptionInput = styled(Input)`
-  /* width: 530px; */
-`;

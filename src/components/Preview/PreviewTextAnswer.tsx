@@ -20,7 +20,7 @@ const PreviewTextAnswer = ({ question, width }: IPreviewTextAnswerProps) => {
         handleContentChange={handleAnswerChange}
         placeholder="내 답변"
         sx={{ marginLeft: '20px', marginTop: '30px', width }}
-        IsDisableUnderline={false}
+        isDisableUnderline={false}
       />
     </>
   );
