@@ -23,6 +23,10 @@ const SurveyQuestion = () => {
     );
   };
 
+  const handleAddQuestion = () => {
+    dispatch(addQuestion());
+  };
+
   return (
     <SurveyQuestionBoxWrapper>
       <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -56,7 +60,7 @@ const SurveyQuestion = () => {
       </DragDropContext>
       <AddQuestionWrapper>
         <Tooltip title="질문 추가" placement="right">
-          <StyledControlPointIcon onClick={() => dispatch(addQuestion())} />
+          <StyledControlPointIcon onClick={handleAddQuestion} />
         </Tooltip>
       </AddQuestionWrapper>
     </SurveyQuestionBoxWrapper>
