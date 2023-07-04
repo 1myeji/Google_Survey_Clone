@@ -1,6 +1,7 @@
 import Checkbox from '@mui/material/Checkbox';
 import { useDispatch } from 'react-redux';
 import { changeCheckBox } from '../../store/surveyQuestionSlice';
+import { SxProps, Theme } from '@mui/material/styles';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -9,7 +10,7 @@ interface ICheckBoxIconProps {
   id?: number;
   index?: number;
   checked?: boolean;
-  sx?: any;
+  sx?: SxProps<Theme>;
 }
 
 const CheckBoxIcon = ({ disabled, id, index, checked, sx }: ICheckBoxIconProps) => {

@@ -1,4 +1,5 @@
 import Input from '@mui/material/Input';
+import { SxProps, Theme } from '@mui/material/styles';
 
 const ariaLabel = { 'aria-label': 'description' };
 
@@ -7,7 +8,7 @@ interface ISurveyInputProps {
   handleContentChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
   placeholder?: string;
-  sx?: any;
+  sx?: SxProps<Theme>;
   isDisableUnderline?: boolean;
 }
 

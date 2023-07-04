@@ -1,11 +1,12 @@
 import Radio from '@mui/material/Radio';
 import { useDispatch } from 'react-redux';
 import { changeOptionCheck } from '../../store/surveyQuestionSlice';
+import { SxProps, Theme } from '@mui/material/styles';
 
 interface IRadioIconProps {
   value?: string;
   disabled: boolean;
-  sx?: any;
+  sx?: SxProps<Theme>;
   id?: number;
   index?: number;
   checked?: boolean;
