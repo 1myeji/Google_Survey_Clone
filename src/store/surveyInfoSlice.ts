@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface surveyInfoState {
+interface SurveyInfoState {
   title: string;
   description: string;
 }
@@ -10,7 +10,7 @@ interface ChangeInfoPayload {
   value: string;
 }
 
-const initialState: surveyInfoState = {
+const initialState: SurveyInfoState = {
   title: '제목 없는 설문지',
   description: '',
 };
