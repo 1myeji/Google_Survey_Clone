@@ -1,4 +1,4 @@
-import { surveyQuestionState } from '../../store/surveyQuestionSlice';
+import { QuestionType, surveyQuestionState } from '../../store/surveyQuestionSlice';
 import PreviewCheckbox from './PreviewCheckbox';
 import PreviewDropDown from './PreviewDropDown';
 import PreviewMultipleChoice from './PreviewMultipleChoice';
@@ -14,16 +14,16 @@ interface IPreviewQuestionProps {
 
 const PreviewQuestion = ({ question, isSubmitted }: IPreviewQuestionProps) => {
   const previewQuestionType = () => {
-    switch (question.age) {
-      case '10':
+    switch (question.questionType) {
+      case QuestionType.ShortAnswer:
         return <PreviewTextAnswer question={question} width="300px" />;
-      case '20':
+      case QuestionType.LongAnswer:
         return <PreviewTextAnswer question={question} width="650px" />;
-      case '30':
+      case QuestionType.MultipleChoice:
         return <PreviewMultipleChoice question={question} />;
-      case '40':
+      case QuestionType.CheckBox:
         return <PreviewCheckbox question={question} />;
-      case '50':
+      case QuestionType.Dropdown:
         return <PreviewDropDown question={question} />;
       default:
         return null;
@@ -34,13 +34,13 @@ const PreviewQuestion = ({ question, isSubmitted }: IPreviewQuestionProps) => {
     if (!isSubmitted || !question.essential) {
       return false;
     }
-    switch (question.age) {
-      case '10':
-      case '20':
+    switch (question.questionType) {
+      case QuestionType.ShortAnswer:
+      case QuestionType.LongAnswer:
         return !question.questionAnswer;
-      case '30':
-      case '40':
-      case '50':
+      case QuestionType.MultipleChoice:
+      case QuestionType.CheckBox:
+      case QuestionType.Dropdown:
         return !question.questionOptions.some(option => option.checked);
       default:
         return false;

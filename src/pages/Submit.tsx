@@ -3,6 +3,7 @@ import { RootState } from '../store/store';
 import SurveyInfo from '../components/common/SurveyInfo';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
+import { QuestionType } from '../store/surveyQuestionSlice';
 
 const Submit = () => {
   const surveyInfo = useSelector((state: RootState) => state.surveyInfo);
@@ -25,11 +26,13 @@ const Submit = () => {
               <StyledButton variant="contained" color="secondary">
                 제출한 답변
               </StyledButton>
-              {question.age === '10' || question.age === '20' ? (
+              {question.questionType === QuestionType.ShortAnswer ||
+              question.questionType === QuestionType.LongAnswer ? (
                 <p>{question.questionAnswer}</p>
-              ) : question.age === '30' || question.age === '50' ? (
+              ) : question.questionType === QuestionType.MultipleChoice ||
+                question.questionType === QuestionType.Dropdown ? (
                 <p>{question.questionOptions.find(option => option.checked)?.optionTitle}</p>
-              ) : question.age === '40' ? (
+              ) : question.questionType === QuestionType.CheckBox ? (
                 question.questionOptions
                   .filter(option => option.checked)
                   .map(option => <p key={option.id}>{option.optionTitle}</p>)

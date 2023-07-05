@@ -44,10 +44,13 @@ const SurveyQuestion = () => {
                       <SurveyQuestionHeader
                         dragHandleProps={provided.dragHandleProps}
                         id={question.id}
-                        age={question.age}
+                        questionType={question.questionType}
                         title={question.questionTitle}
                       />
-                      <SurveyQuestionAnswer age={question.age} questionId={question.id} />
+                      <SurveyQuestionAnswer
+                        questionType={question.questionType}
+                        questionId={question.id}
+                      />
                       <SurveyQuestionControls id={question.id} essential={question.essential} />
                     </SurveyQuestionBox>
                   )}

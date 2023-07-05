@@ -9,24 +9,58 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import EditFormatIcon from '../common/EditFormatIcon';
 import { useDispatch } from 'react-redux';
-import { changeAge, changeQuestionTitle } from '../../store/surveyQuestionSlice';
+import {
+  changeQuestionType,
+  changeQuestionTitle,
+  QuestionType,
+} from '../../store/surveyQuestionSlice';
 import { DraggableProvided } from 'react-beautiful-dnd';
+import { SelectChangeEvent } from '@mui/material/Select';
 
-const SurveyQuestionType = ['단답형', '장문형', '객관식 질문', '체크박스', '드롭다운'];
+const surveyQuestionType = ['단답형', '장문형', '객관식 질문', '체크박스', '드롭다운'];
 
 interface ISurveyQuestionHeaderProps {
   id: number;
-  age: string;
+  questionType:
+    | QuestionType.ShortAnswer
+    | QuestionType.LongAnswer
+    | QuestionType.MultipleChoice
+    | QuestionType.CheckBox
+    | QuestionType.Dropdown;
   title: string;
   dragHandleProps: DraggableProvided['dragHandleProps'];
 }
 
-const SurveyQuestionHeader = ({ id, age, title, dragHandleProps }: ISurveyQuestionHeaderProps) => {
+const SurveyQuestionHeader = ({
+  id,
+  questionType,
+  title,
+  dragHandleProps,
+}: ISurveyQuestionHeaderProps) => {
   const dispatch = useDispatch();
   const [isFocused, setIsFocused] = useState(false);
 
   const handleTextFieldFocus = () => {
     setIsFocused(!isFocused);
+  };
+
+  const handleQuestionTitleChange =
+    (id: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(
+        changeQuestionTitle({
+          id,
+          title: event.target.value,
+        }),
+      );
+    };
+
+  const handleQuestionTypeChange = (id: number) => (event: SelectChangeEvent) => {
+    dispatch(
+      changeQuestionType({
+        id,
+        questionType: String(event.target.value),
+      }),
+    );
   };
 
   return (
@@ -43,17 +77,14 @@ const SurveyQuestionHeader = ({ id, age, title, dragHandleProps }: ISurveyQuesti
           color="secondary"
           onFocus={handleTextFieldFocus}
           onBlur={handleTextFieldFocus}
-          onChange={event => dispatch(changeQuestionTitle({ id, title: event.target.value }))}
+          onChange={handleQuestionTitleChange(id)}
         />
         <IconButton>
           <CropOriginalIcon />
         </IconButton>
         <FormControl sx={{ minWidth: 190, marginLeft: 2 }}>
-          <Select
-            value={age}
-            onChange={event => dispatch(changeAge({ id, age: String(event.target.value) }))}
-          >
-            {SurveyQuestionType.map((type, index) => (
+          <Select value={questionType} onChange={handleQuestionTypeChange(id)}>
+            {surveyQuestionType.map((type, index) => (
               <MenuItem value={(index + 1) * 10} key={type}>
                 {type}
               </MenuItem>

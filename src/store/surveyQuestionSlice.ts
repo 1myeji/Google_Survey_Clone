@@ -1,8 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export enum QuestionType {
+  ShortAnswer = '10',
+  LongAnswer = '20',
+  MultipleChoice = '30',
+  CheckBox = '40',
+  Dropdown = '50',
+}
+
 export interface surveyQuestionState {
   id: number;
-  age: string;
+  questionType:
+    | QuestionType.ShortAnswer
+    | QuestionType.LongAnswer
+    | QuestionType.MultipleChoice
+    | QuestionType.CheckBox
+    | QuestionType.Dropdown;
   questionTitle: string;
   questionAnswer: string;
   questionOptions: {
@@ -16,7 +29,7 @@ export interface surveyQuestionState {
 const initialState: surveyQuestionState[] = [
   {
     id: Date.now(),
-    age: '30',
+    questionType: QuestionType.MultipleChoice,
     questionTitle: '',
     questionAnswer: '',
     questionOptions: [{ id: Date.now(), optionTitle: '옵션1', checked: false }],
@@ -31,7 +44,7 @@ const surveyQuestion = createSlice({
     addQuestion: state => {
       state.push({
         id: Date.now(),
-        age: '30',
+        questionType: QuestionType.MultipleChoice,
         questionTitle: '',
         questionAnswer: '',
         questionOptions: [{ id: Date.now(), optionTitle: '옵션1', checked: false }],
@@ -51,10 +64,10 @@ const surveyQuestion = createSlice({
       }
     },
 
-    changeAge: (state, action) => {
-      const { id, age } = action.payload;
+    changeQuestionType: (state, action) => {
+      const { id, questionType } = action.payload;
       const question = state.find(question => question.id === id);
-      if (question) question.age = age;
+      if (question) question.questionType = questionType;
     },
 
     changeQuestionTitle: (state, action) => {
@@ -158,7 +171,7 @@ export const {
   addQuestion,
   deleteQuestion,
   copyQuestion,
-  changeAge,
+  changeQuestionType,
   changeQuestionTitle,
   addOption,
   deleteOption,

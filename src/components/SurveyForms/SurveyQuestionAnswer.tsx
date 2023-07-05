@@ -1,3 +1,4 @@
+import { QuestionType } from '../../store/surveyQuestionSlice';
 import Checkbox from './SurveyQuestionAnswer/Checkbox';
 import DropDown from './SurveyQuestionAnswer/DropDown';
 import LongAnswer from './SurveyQuestionAnswer/LongAnswer';
@@ -5,21 +6,21 @@ import MultipleChoice from './SurveyQuestionAnswer/MultipleChoice ';
 import ShortAnswer from './SurveyQuestionAnswer/ShortAnswer';
 
 interface ISurveyQuestionAnswerProps {
-  age: string;
+  questionType: string;
   questionId: number;
 }
 
-const SurveyQuestionAnswer = ({ age, questionId }: ISurveyQuestionAnswerProps) => {
-  switch (age) {
-    case '10':
+const SurveyQuestionAnswer = ({ questionType, questionId }: ISurveyQuestionAnswerProps) => {
+  switch (questionType) {
+    case QuestionType.ShortAnswer:
       return <ShortAnswer />;
-    case '20':
+    case QuestionType.LongAnswer:
       return <LongAnswer />;
-    case '30':
+    case QuestionType.MultipleChoice:
       return <MultipleChoice questionId={questionId} />;
-    case '40':
+    case QuestionType.CheckBox:
       return <Checkbox questionId={questionId} />;
-    case '50':
+    case QuestionType.Dropdown:
       return <DropDown questionId={questionId} />;
     default:
       return <div>올바른 질문 유형을 선택해주세요.</div>;

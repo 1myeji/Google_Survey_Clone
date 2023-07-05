@@ -6,7 +6,7 @@ import PreviewQuestion from '../components/Preview/PreviewQuestion';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { resetForm } from '../store/surveyQuestionSlice';
+import { QuestionType, resetForm } from '../store/surveyQuestionSlice';
 
 const Preview = () => {
   const navigate = useNavigate();
@@ -18,8 +18,13 @@ const Preview = () => {
   const isRequiredAnswered = () => {
     return surveyQuestion.every(question => {
       if (!question.essential) return true;
-      if (['10', '20'].includes(question.age)) return !!question.questionAnswer;
-      if (['30', '40', '50'].includes(question.age)) {
+      if ([QuestionType.ShortAnswer, QuestionType.LongAnswer].includes(question.questionType))
+        return !!question.questionAnswer;
+      if (
+        [QuestionType.MultipleChoice, QuestionType.CheckBox, QuestionType.Dropdown].includes(
+          question.questionType,
+        )
+      ) {
         return question.questionOptions.some(option => option.checked);
       }
       return false;
