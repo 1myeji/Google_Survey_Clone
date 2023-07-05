@@ -22,7 +22,7 @@ interface IOptionGroupProps {
 
 const OptionGroup = ({ type, questionId }: IOptionGroupProps) => {
   const InputIcon = optionType[type];
-  const options = useSelector((state: RootState) =>
+  const question = useSelector((state: RootState) =>
     state.surveyQuestion.find(question => question.id === questionId),
   );
 
@@ -39,20 +39,25 @@ const OptionGroup = ({ type, questionId }: IOptionGroupProps) => {
       }),
     );
   };
+
+  const hadleAddOption = () => {
+    dispatch(addOption({ questionId }));
+  };
+
   return (
     <OptionGroupWrapper>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="options">
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              {options?.questionOptions.map((option, index) => (
+              {question?.questionOptions.map((option, index) => (
                 <Draggable key={String(option.id)} draggableId={String(option.id)} index={index}>
                   {provided => (
                     <Wrap ref={provided.innerRef} {...provided.draggableProps}>
                       <DragIndicatorWrapper {...provided.dragHandleProps}>
                         <DragIndicatorIcon />
                       </DragIndicatorWrapper>
-                      <OptionInputGroup index={index} options={options}>
+                      <OptionInputGroup index={index} question={question}>
                         <InputIcon value={`${index + 1}`} disabled={true} />
                       </OptionInputGroup>
                     </Wrap>
@@ -65,14 +70,11 @@ const OptionGroup = ({ type, questionId }: IOptionGroupProps) => {
         </Droppable>
       </DragDropContext>
       <InputGroupWrapper>
-        <InputIcon disabled={true} value={options && String(options.questionOptions.length + 1)} />
-        <AddOption
-          onClick={() => {
-            dispatch(addOption({ questionId }));
-          }}
-        >
-          옵션 추가
-        </AddOption>
+        <InputIcon
+          disabled={true}
+          value={question && String(question.questionOptions.length + 1)}
+        />
+        <AddOption onClick={hadleAddOption}>옵션 추가</AddOption>
       </InputGroupWrapper>
     </OptionGroupWrapper>
   );

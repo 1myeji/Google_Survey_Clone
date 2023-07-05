@@ -12,37 +12,41 @@ import SurveyInput from '../../common/SurveyInput';
 
 interface IOptionInputGroupProps {
   index: number;
-  options: surveyQuestionState;
+  question: surveyQuestionState;
   children: JSX.Element;
 }
 
-const OptionInputGroup = ({ index, options, children }: IOptionInputGroupProps) => {
+const OptionInputGroup = ({ index, question, children }: IOptionInputGroupProps) => {
   const dispatch = useDispatch();
 
   const handleOptionTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changeOptionTitle({ id: options.id, index, title: event.target.value }));
+    dispatch(changeOptionTitle({ id: question.id, index, title: event.target.value }));
+  };
+
+  const handleDeleteOption = () => {
+    dispatch(deleteOption({ id: question.id, index }));
   };
 
   return (
-    <RadioInputGroupWrapper>
+    <OptionInputGroupWrapper>
       {children}
       <SurveyInput
-        value={options.questionOptions[index].optionTitle || `옵션 ${index + 1}`}
+        value={question.questionOptions[index].optionTitle || `옵션 ${index + 1}`}
         handleContentChange={handleOptionTitleChange}
         sx={{ width: '570px' }}
       />
-      <Tooltip title="삭제" onClick={() => dispatch(deleteOption({ id: options.id, index }))}>
+      <Tooltip title="삭제" onClick={handleDeleteOption}>
         <IconButton>
           <ClearIcon />
         </IconButton>
       </Tooltip>
-    </RadioInputGroupWrapper>
+    </OptionInputGroupWrapper>
   );
 };
 
 export default OptionInputGroup;
 
-const RadioInputGroupWrapper = styled.div`
+const OptionInputGroupWrapper = styled.div`
   display: flex;
   align-items: center;
 `;

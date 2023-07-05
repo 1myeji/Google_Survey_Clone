@@ -26,7 +26,6 @@ const RadioIcon = ({ value, disabled, sx, id, index, checked }: IRadioIconProps)
       value={value}
       name="radio-buttons"
       color="secondary"
-      inputProps={{ 'aria-label': 'A' }}
       disabled={disabled}
       sx={sx}
     />
