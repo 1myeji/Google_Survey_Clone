@@ -21,15 +21,23 @@ const SurveyQuestionControls = ({ id, essential }: ISurveyQuestionControlProps) 
     dispatch(toggleEssential({ id }));
   };
 
+  const handleCopyQuestion = () => {
+    dispatch(copyQuestion(id));
+  };
+
+  const handleDeleteQuestion = () => {
+    dispatch(deleteQuestion(id));
+  };
+
   return (
     <ControlsWrapper>
       <Tooltip title="복사">
-        <IconButton onClick={() => dispatch(copyQuestion(id))}>
+        <IconButton onClick={handleCopyQuestion}>
           <ContentCopyIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="삭제">
-        <IconButton onClick={() => dispatch(deleteQuestion(id))}>
+        <IconButton onClick={handleDeleteQuestion}>
           <DeleteOutlineIcon />
         </IconButton>
       </Tooltip>

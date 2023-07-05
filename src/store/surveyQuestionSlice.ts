@@ -60,7 +60,8 @@ const surveyQuestion = createSlice({
       const questionIndex = state.findIndex(question => question.id === action.payload);
       if (questionIndex !== -1) {
         const questionCopy = JSON.parse(JSON.stringify(state[questionIndex]));
-        (questionCopy.id = Date.now()), state.splice(questionIndex + 1, 0, questionCopy);
+        questionCopy.id = Date.now();
+        state.splice(questionIndex + 1, 0, questionCopy);
       }
     },
 
