@@ -1,4 +1,4 @@
-import { QuestionType, surveyQuestionState } from '../../store/surveyQuestionSlice';
+import { QuestionType, SurveyQuestionState } from '../../store/surveyQuestionSlice';
 import PreviewCheckbox from './PreviewCheckbox';
 import PreviewDropDown from './PreviewDropDown';
 import PreviewMultipleChoice from './PreviewMultipleChoice';
@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 interface IPreviewQuestionProps {
-  question: surveyQuestionState;
+  question: SurveyQuestionState;
   isSubmitted: boolean;
 }
 

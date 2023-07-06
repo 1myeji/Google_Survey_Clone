@@ -1,10 +1,10 @@
-import { surveyQuestionState, changeOptionCheck } from '../../store/surveyQuestionSlice';
+import { SurveyQuestionState, changeOptionCheck } from '../../store/surveyQuestionSlice';
 import { useDispatch } from 'react-redux';
 import { FormControl, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import styled from 'styled-components';
 
 interface IPreviewDropDownProps {
-  question: surveyQuestionState;
+  question: SurveyQuestionState;
 }
 
 const PreviewDropDown = ({ question }: IPreviewDropDownProps) => {

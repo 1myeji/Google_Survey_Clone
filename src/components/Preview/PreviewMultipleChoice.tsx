@@ -1,8 +1,8 @@
-import { surveyQuestionState } from '../../store/surveyQuestionSlice';
+import { SurveyQuestionState } from '../../store/surveyQuestionSlice';
 import RadioIcon from '../common/RadioIcon';
 import styled from 'styled-components';
 interface IPreviewMultipleChoiceProps {
-  question: surveyQuestionState;
+  question: SurveyQuestionState;
 }
 
 const PreviewMultipleChoice = ({ question }: IPreviewMultipleChoiceProps) => {

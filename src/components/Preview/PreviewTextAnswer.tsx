@@ -1,9 +1,9 @@
 import SurveyInput from '../common/SurveyInput';
 import { useDispatch } from 'react-redux';
-import { changeQuestionAnswer, surveyQuestionState } from '../../store/surveyQuestionSlice';
+import { changeQuestionAnswer, SurveyQuestionState } from '../../store/surveyQuestionSlice';
 
 interface IPreviewTextAnswerProps {
-  question: surveyQuestionState;
+  question: SurveyQuestionState;
   width: '300px' | '650px';
 }
 

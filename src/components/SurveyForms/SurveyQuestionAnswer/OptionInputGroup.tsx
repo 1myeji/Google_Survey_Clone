@@ -6,13 +6,13 @@ import { useDispatch } from 'react-redux';
 import {
   changeOptionTitle,
   deleteOption,
-  surveyQuestionState,
+  SurveyQuestionState,
 } from '../../../store/surveyQuestionSlice';
 import SurveyInput from '../../common/SurveyInput';
 
 interface IOptionInputGroupProps {
   index: number;
-  question: surveyQuestionState;
+  question: SurveyQuestionState;
   children: JSX.Element;
 }
 

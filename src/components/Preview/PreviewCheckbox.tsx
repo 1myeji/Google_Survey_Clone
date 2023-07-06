@@ -1,9 +1,9 @@
-import { surveyQuestionState } from '../../store/surveyQuestionSlice';
+import { SurveyQuestionState } from '../../store/surveyQuestionSlice';
 import CheckBoxIcon from '../common/CheckBoxIcon';
 import styled from 'styled-components';
 
 interface IPreviewCheckboxProps {
-  question: surveyQuestionState;
+  question: SurveyQuestionState;
 }
 
 const PreviewCheckbox = ({ question }: IPreviewCheckboxProps) => {

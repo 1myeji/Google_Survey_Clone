@@ -3,13 +3,13 @@ import { RootState } from '../store/store';
 import SurveyInfo from '../components/common/SurveyInfo';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
-import { QuestionType, surveyQuestionState } from '../store/surveyQuestionSlice';
+import { QuestionType, SurveyQuestionState } from '../store/surveyQuestionSlice';
 
 const Submit = () => {
   const surveyInfo = useSelector((state: RootState) => state.surveyInfo);
   const surveyQuestion = useSelector((state: RootState) => state.surveyQuestion);
 
-  const renderAnswer = (question: surveyQuestionState) => {
+  const renderAnswer = (question: SurveyQuestionState) => {
     switch (question.questionType) {
       case QuestionType.ShortAnswer:
       case QuestionType.LongAnswer:

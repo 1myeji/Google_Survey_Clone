@@ -8,7 +8,7 @@ export enum QuestionType {
   Dropdown = '50',
 }
 
-export interface surveyQuestionState {
+export interface SurveyQuestionState {
   id: number;
   questionType:
     | QuestionType.ShortAnswer
@@ -26,7 +26,7 @@ export interface surveyQuestionState {
   essential: boolean;
 }
 
-const initialState: surveyQuestionState[] = [
+const initialState: SurveyQuestionState[] = [
   {
     id: Date.now(),
     questionType: QuestionType.MultipleChoice,
