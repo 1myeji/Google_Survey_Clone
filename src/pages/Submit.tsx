@@ -3,45 +3,50 @@ import { RootState } from '../store/store';
 import SurveyInfo from '../components/common/SurveyInfo';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
-import { QuestionType } from '../store/surveyQuestionSlice';
+import { QuestionType, surveyQuestionState } from '../store/surveyQuestionSlice';
 
 const Submit = () => {
   const surveyInfo = useSelector((state: RootState) => state.surveyInfo);
   const surveyQuestion = useSelector((state: RootState) => state.surveyQuestion);
 
+  const renderAnswer = (question: surveyQuestionState) => {
+    switch (question.questionType) {
+      case QuestionType.ShortAnswer:
+      case QuestionType.LongAnswer:
+        return <p>{question.questionAnswer}</p>;
+      case QuestionType.MultipleChoice:
+      case QuestionType.Dropdown:
+        return <p>{question.questionOptions.find(option => option.checked)?.optionTitle}</p>;
+      case QuestionType.CheckBox:
+        return question.questionOptions
+          .filter(option => option.checked)
+          .map(option => <p key={option.id}>{option.optionTitle}</p>);
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div>
-      <SurveyInfo includePurpleBox={true}>
-        <Title>{surveyInfo.title}</Title>
-        <Description>{surveyInfo.description}</Description>
-        {surveyQuestion.map(question => (
-          <AnswerWrapper key={question.id}>
-            <ButtonWrapper>
-              <StyledButton variant="contained" color="secondary">
-                제목
-              </StyledButton>
-              <h3>{question.questionTitle}</h3>
-            </ButtonWrapper>
-            <ButtonWrapper>
-              <StyledButton variant="contained" color="secondary">
-                제출한 답변
-              </StyledButton>
-              {question.questionType === QuestionType.ShortAnswer ||
-              question.questionType === QuestionType.LongAnswer ? (
-                <p>{question.questionAnswer}</p>
-              ) : question.questionType === QuestionType.MultipleChoice ||
-                question.questionType === QuestionType.Dropdown ? (
-                <p>{question.questionOptions.find(option => option.checked)?.optionTitle}</p>
-              ) : question.questionType === QuestionType.CheckBox ? (
-                question.questionOptions
-                  .filter(option => option.checked)
-                  .map(option => <p key={option.id}>{option.optionTitle}</p>)
-              ) : null}
-            </ButtonWrapper>
-          </AnswerWrapper>
-        ))}
-      </SurveyInfo>
-    </div>
+    <SurveyInfo includePurpleBox={true}>
+      <Title>{surveyInfo.title}</Title>
+      <Description>{surveyInfo.description}</Description>
+      {surveyQuestion.map(question => (
+        <AnswerWrapper key={question.id}>
+          <TitleWrapper>
+            <StyledButton variant="contained" color="secondary">
+              제목
+            </StyledButton>
+            <h3>{question.questionTitle}</h3>
+          </TitleWrapper>
+          <SubmitWrapper>
+            <StyledButton variant="contained" color="secondary">
+              제출한 답변
+            </StyledButton>
+            {renderAnswer(question)}
+          </SubmitWrapper>
+        </AnswerWrapper>
+      ))}
+    </SurveyInfo>
   );
 };
 
@@ -75,8 +80,10 @@ const StyledButton = styled(Button)`
   height: 30px;
 `;
 
-const ButtonWrapper = styled.div`
+const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
 `;
+
+const SubmitWrapper = styled(TitleWrapper)``;
