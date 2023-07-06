@@ -15,25 +15,17 @@ const Preview = () => {
   const surveyQuestion = useSelector((state: RootState) => state.surveyQuestion);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const isRequiredAnswered = () => {
-    return surveyQuestion.every(question => {
-      if (!question.essential) return true;
-      if ([QuestionType.ShortAnswer, QuestionType.LongAnswer].includes(question.questionType))
-        return !!question.questionAnswer;
-      if (
-        [QuestionType.MultipleChoice, QuestionType.CheckBox, QuestionType.Dropdown].includes(
-          question.questionType,
-        )
-      ) {
-        return question.questionOptions.some(option => option.checked);
-      }
-      return false;
-    });
-  };
+  const isRequiredAnswered = surveyQuestion.every(question => {
+    if (!question.essential) return true;
+    return question.questionType === QuestionType.ShortAnswer ||
+      question.questionType === QuestionType.LongAnswer
+      ? !!question.questionAnswer
+      : question.questionOptions.some(option => option.checked);
+  });
 
   const handleSubmit = () => {
     setIsSubmitted(true);
-    if (isRequiredAnswered()) {
+    if (isRequiredAnswered) {
       navigate('/submit');
     }
   };
