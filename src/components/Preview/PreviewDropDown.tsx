@@ -14,13 +14,13 @@ const PreviewDropDown = ({ question }: IPreviewDropDownProps) => {
     dispatch(changeOptionCheck({ id: question.id, index: event.target.value }));
   };
 
+  const value = String(question.questionOptions.findIndex(option => option.checked));
+  const selectValue = value !== '-1' ? value : '';
+
   return (
     <DropDownWrapper>
       <FormControl sx={{ minWidth: 190, marginLeft: 2 }}>
-        <Select
-          value={String(question.questionOptions.findIndex(option => option.checked))}
-          onChange={handleChange}
-        >
+        <Select value={selectValue} onChange={handleChange}>
           {question.questionOptions.map((option, index) => (
             <MenuItem value={index} key={option.id}>
               {option.optionTitle}
